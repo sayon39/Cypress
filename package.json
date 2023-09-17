@@ -1,0 +1,14 @@
+{
+  "name": "cypressautomation",
+  "version": "1.0.0",
+  "description": "this project will be used for cypress api and web automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sayondas",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.2.0"
+  }
+}
