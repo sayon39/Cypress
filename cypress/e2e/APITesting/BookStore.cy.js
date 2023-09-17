@@ -1,3 +1,6 @@
+const Ajv=require('Ajv');
+const ajv=new Ajv
+
 describe("Verify book lifecycle API", ()=>{
 
     let bearerToken=null, orderId=null;
@@ -38,15 +41,23 @@ describe("Verify book lifecycle API", ()=>{
     })
 
     it("Get order info using orderId", ()=>{
-        cy.request({
-            method:'GET',
-            url: 'https://simple-books-api.glitch.me/orders/'+orderId,
-            headers:{
-                'Authorization': 'Bearer '+bearerToken
-            }
-        })
-        .then((response) =>{
-            expect(response.status).to.eq(200);
+        cy.fixture('BookStoreSchemaValidation').then((data) =>{
+            const schema=data;
+
+            cy.request({
+                method:'GET',
+                url: 'https://simple-books-api.glitch.me/orders/'+orderId,
+                headers:{
+                    'Authorization': 'Bearer '+bearerToken
+                }
+            })
+            .then((response) =>{
+                expect(response.status).to.eq(200);
+                const validate=ajv.compile(schema)
+                let isValid=validate(response.body)
+                expect(isValid).to.be.true;
+            })
+
         })
     })
 })

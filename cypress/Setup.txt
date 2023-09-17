@@ -1,0 +1,4 @@
+Create package.json -> npm -i init
+Cypress install -> npm install cypress --save -dev
+Start cypress -> npx cypress open
+Execute script -> npx cypress run --spec relativePath
